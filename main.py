@@ -4,9 +4,11 @@ import util.classifier_util as cu
 import algorithm.perceptron as perceptron
 import algorithm.svm as svm
 import algorithm.naiveBayes as naiveBayes
+import algorithm.naiveBayesDigit as naiveBayesDigit
+import algorithm.naiveBayesDigitClassification as naiveBayesDigitClassification
 
 if __name__ == '__main__':
-    dataset = 'face'
+    dataset = 'digit'
     train_data,train_label,validation_data,validation_label,test_data,test_label = ld.load(dataset)
     weights = cu.generate_weights(dataset)
     total_train_data = pd.merge_data(train_data,validation_data)
@@ -22,10 +24,21 @@ if __name__ == '__main__':
         cu.find_accuracy(validation_data,validation_label,model)
         cu.find_accuracy(test_data,test_label,model)
 
-    elif (choice == 2):
+    elif (choice == 2 and dataset == "face"):
         print("****************** Started Training ******************")
         naiveBayes.train(total_train_data, total_train_label)
         naiveBayes.test(test_data, test_label)
+
+    # elif (choice == 2 and dataset == "digit"):
+    #     print("****************** Started Training ******************")
+    #     naiveBayesDigit.trainDigit(total_train_data, total_train_label)
+    #     naiveBayesDigit.testDigit(test_data, test_label)
+
+
+    elif (choice == 2 and dataset == "digit"):
+        print("****************** Started Training ******************")
+        naiveBayesDigitClassification.trainDigit(total_train_data, total_train_label)
+        naiveBayesDigitClassification.testDigit(test_data, test_label)
 
     elif (choice == 3):
         print("****************** Started Training ******************")

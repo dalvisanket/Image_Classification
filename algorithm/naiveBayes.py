@@ -1,6 +1,5 @@
 faceProbMatrix, notFaceProbMatrix, pyFace, pyNotFace = [],[],0,0
 
-
 def train(train_data, train_label):
     global faceProbMatrix
     global notFaceProbMatrix
@@ -228,120 +227,76 @@ def extractFeature(oneface):
         for j in range(0, 20):
             if oneface[i][j] == 2:
                 f00 += 1
-    #     if f00>0:
-    #         f00=f00/280*100
-
     # probability of non space for f01 feature
     for i in range(0, 14):
         for j in range(20, 40):
             if oneface[i][j] == 2:
                 f01 += 1
-    #     if f01>0:
-    #         f01=f01/280*100
-
     # probability of non space for f02 feature
     for i in range(0, 14):
         for j in range(40, 60):
             if oneface[i][j] == 2:
                 f02 += 1
-    #     if f02>0:
-    #         f02=f02/280*100
-
     # probability of non space for f10 feature
     for i in range(14, 28):
         for j in range(0, 20):
             if oneface[i][j] == 2:
                 f10 += 1
-    #     if f10>0:
-    #         f10=f10/280*100
-
     # probability of non space for f11 feature
     for i in range(14, 28):
         for j in range(20, 40):
             if oneface[i][j] == 2:
                 f11 += 1
-    #     if f11>0:
-    #         f11=f11/280*100
-
     # probability of non space for f12 feature
     for i in range(14, 28):
         for j in range(40, 60):
             if oneface[i][j] == 2:
                 f12 += 1
-    #     if f12>0:
-    #         f12=f12/280*100
-
     # probability of non space for f20 feature
     for i in range(28, 42):
         for j in range(0, 20):
             if oneface[i][j] == 2:
                 f20 += 1
-    #     if f20>0:
-    #         f20=f20/280*100
-
     # probability of non space for f21 feature
     for i in range(28, 42):
         for j in range(20, 40):
             if oneface[i][j] == 2:
                 f21 += 1
-    #     if f21>0:
-    #         f21=f21/280*100
-
     # probability of non space for f22 feature
     for i in range(28, 42):
         for j in range(40, 60):
             if oneface[i][j] == 2:
                 f22 += 1
-    #     if f22>0:
-    #         f22=f22/280*100
-
     # probability of non space for f30 feature
     for i in range(42, 56):
         for j in range(0, 20):
             if oneface[i][j] == 2:
                 f30 += 1
-    #     if f30>0:
-    #         f30=f30/280*100
-
     # probability of non space for f31 feature
     for i in range(42, 56):
         for j in range(20, 40):
             if oneface[i][j] == 2:
                 f31 += 1
-    #     if f31>0:
-    #         f31=f31/280*100
-
     # probability of non space for f32 feature
     for i in range(42, 56):
         for j in range(40, 60):
             if oneface[i][j] == 2:
                 f32 += 1
-    #     if f32>0:
-    #         f32=f32/280*100
-
     # probability of non space for f40 feature
     for i in range(56, 70):
         for j in range(0, 20):
             if oneface[i][j] == 2:
                 f40 += 1
-    #     if f40>0:
-    #         f40=f40/280*100
-
     # probability of non space for f41 feature
     for i in range(56, 70):
         for j in range(20, 40):
             if oneface[i][j] == 2:
                 f41 += 1
-    #     if f41>0:
-    #         f41=f41/280*100
-
     # probability of non space for f42 feature
     for i in range(56, 70):
         for j in range(40, 60):
             if oneface[i][j] == 2:
                 f42 += 1
-    #     if f42>0:
-    #         f42=f42/280*100
     faceFeature.append(f00)
     faceFeature.append(f01)
     faceFeature.append(f02)
