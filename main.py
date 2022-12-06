@@ -5,7 +5,7 @@ import algorithm.perceptron as perceptron
 import algorithm.svm as svm
 import algorithm.naiveBayes as naiveBayes
 import algorithm.naiveBayesDigit as naiveBayesDigit
-import algorithm.naiveBayesDigitClassification as naiveBayesDigitClassification
+import algorithm.naiveB as naiveBayesDigit
 
 if __name__ == '__main__':
     dataset = 'digit'
@@ -37,8 +37,10 @@ if __name__ == '__main__':
 
     elif (choice == 2 and dataset == "digit"):
         print("****************** Started Training ******************")
-        naiveBayesDigitClassification.trainDigit(total_train_data, total_train_label)
-        naiveBayesDigitClassification.testDigit(test_data, test_label)
+        feature_prob,prob_of_digit =  naiveBayesDigit.train(total_train_data, total_train_label)
+        #naiveBayesDigitClassification.testDigit(test_data, test_label)
+
+        naiveBayesDigit.accuracy(test_data,test_label,feature_prob,prob_of_digit)
 
     elif (choice == 3):
         print("****************** Started Training ******************")
