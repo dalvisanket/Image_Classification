@@ -1,12 +1,14 @@
 import numpy as np
 import math
 
+feature_dimension = 4
+total_features = 49
 def train(df,label):
 
     df_feature_split = split_image_into_features(df)
 
 
-    feature_prob = np.full((10,49,4),0.01,dtype=float)
+    feature_prob = np.full((10,total_features,feature_dimension),0.01,dtype=float)
 
     label_count = np.full((10),0,dtype=int)
 
@@ -17,16 +19,9 @@ def train(df,label):
     for count in range(label_count.shape[0]):
         feature_prob[count] = feature_prob[count]/label_count[count]
 
-    #feature_prob[feature_prob == 0.0] = 0.001
-
     prob_of_digit = label_count/df.shape[0]
 
-    count = 0;
-    for image in range(0, df_feature_split.shape[0]):
-        if(classify(df_feature_split[image],feature_prob,prob_of_digit) == label[image]):
-            count = count + 1
-
-    print(count/df.shape[0])
+    accuracy(df,label,feature_prob,prob_of_digit)
     return feature_prob,prob_of_digit
 
 
@@ -36,7 +31,7 @@ def split_image_into_features(df):
 
     for image in df:
         df_feature_split.append(np.asarray(
-            [image[x:x + 4, y:y + 4] for x in range(0, image.shape[0], 4) for y in range(0, image.shape[1], 4)]))
+            [image[x:x + feature_dimension, y:y + feature_dimension] for x in range(0, image.shape[0], feature_dimension) for y in range(0, image.shape[1], feature_dimension)]))
 
     return np.asarray(df_feature_split)
 
@@ -44,7 +39,7 @@ def split_image_into_features(df):
 def count_image_feature_prob(image,label,label_count, feature_prob):
     for feature in range(0,image.shape[0]):
         feature_count = (image[feature] == 1).sum() + (image[feature] == 2).sum()
-        index  = math.floor(feature_count/4)
+        index  = math.floor(feature_count/feature_dimension)
         if(index == feature_prob.shape[2]):
             index = index - 1
 
@@ -57,7 +52,7 @@ def classify(image,feature_prob,prob_of_digit):
     image_feature_count_index = []
     for feature in range(0,image.shape[0]):
         feature_count = (image[feature] == 1).sum() + (image[feature] == 2).sum()
-        index  = math.floor(feature_count/4)
+        index  = math.floor(feature_count/feature_dimension)
         if(index == feature_prob.shape[2]):
             index = index - 1
 
@@ -79,4 +74,4 @@ def accuracy(df,label,feature_prob,prob_of_digit):
         if (classify(df_feature_split[image], feature_prob, prob_of_digit) == label[image]):
             count = count + 1
 
-    print(count / df.shape[0])
+    print('Accuracy : ',(count / df.shape[0])*100)

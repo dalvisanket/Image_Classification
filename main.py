@@ -4,13 +4,11 @@ import util.classifier_util as cu
 import algorithm.perceptron as perceptron
 import algorithm.svm as svm
 import algorithm.naiveBayes as naiveBayes
-import algorithm.naiveBayesDigit as naiveBayesDigit
 import algorithm.naiveB as naiveBayesDigit
 
 if __name__ == '__main__':
     dataset = 'digit'
     train_data,train_label,validation_data,validation_label,test_data,test_label = ld.load(dataset)
-    weights = cu.generate_weights(dataset)
     total_train_data = pd.merge_data(train_data,validation_data)
     print(total_train_data.shape)
     total_train_label = pd.merge_data(train_label,validation_label)
@@ -18,7 +16,8 @@ if __name__ == '__main__':
     choice = int(input("Enter choice\t"))
     if (choice == 1):
         print("****************** Started Training ******************")
-        model = perceptron.train(train_data,train_label,weights,500)
+        weights = cu.generate_weights(dataset)
+        model = perceptron.train(train_data,train_label,weights,50)
 
         cu.find_accuracy(train_data,train_label,model)
         cu.find_accuracy(validation_data,validation_label,model)
@@ -37,8 +36,8 @@ if __name__ == '__main__':
 
     elif (choice == 2 and dataset == "digit"):
         print("****************** Started Training ******************")
+
         feature_prob,prob_of_digit =  naiveBayesDigit.train(total_train_data, total_train_label)
-        #naiveBayesDigitClassification.testDigit(test_data, test_label)
 
         naiveBayesDigit.accuracy(test_data,test_label,feature_prob,prob_of_digit)
 
