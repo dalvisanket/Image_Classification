@@ -7,7 +7,7 @@ import algorithm.naiveBayes as naiveBayes
 import algorithm.naiveB as naiveBayesDigit
 
 if __name__ == '__main__':
-    dataset = 'digit'
+    dataset = 'face'
     train_data,train_label,validation_data,validation_label,test_data,test_label = ld.load(dataset)
     total_train_data = pd.merge_data(train_data,validation_data)
     print(total_train_data.shape)
@@ -27,11 +27,6 @@ if __name__ == '__main__':
         print("****************** Started Training ******************")
         naiveBayes.train(total_train_data, total_train_label)
         naiveBayes.test(test_data, test_label)
-
-    # elif (choice == 2 and dataset == "digit"):
-    #     print("****************** Started Training ******************")
-    #     naiveBayesDigit.trainDigit(total_train_data, total_train_label)
-    #     naiveBayesDigit.testDigit(test_data, test_label)
 
 
     elif (choice == 2 and dataset == "digit"):
